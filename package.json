@@ -1,0 +1,55 @@
+{
+  "name": "build-notifier",
+  "description": "Notifications for your different build steps",
+  "version": "0.0.0",
+  "bin": {
+    "nopar": "bin/build-notifier"
+  },
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:afbobak/build-notifier.git"
+  },
+  "keywords": [
+    "notify",
+    "buildtool",
+    "growl"
+  ],
+  "author": "Andreas F. Bobak <bobak@abstrakt.ch>",
+  "bugs": "https://github.com/afbobak/build-notifier/issues/",
+  "license": "BSD",
+  "config": {
+    "reporter_test": "spec",
+    "reporter_cov": "lcov",
+    "reports_dir": "reports"
+  },
+  "scripts": {
+    "clean": "rimraf .reports reports *.tgz *.deb *.log",
+    "prejscs": "npm -s run clean",
+    "jscs": "jscs lib/**.js test/**.js | tee jscs.log && (notify -t 'JSCS' -m \"`tail jscs.log`\" && rm jscs.log)",
+    "prehint": "npm -s run jscs",
+    "hint": "jshint lib/**.js test/**.js | tee jshint.log && (notify -t 'JSHint' -m \"`tail jshint.log`\" && rm jshint.log)",
+    "pretest": "npm -s run hint",
+    "test": "istanbul cover --report $npm_package_config_reporter_cov --dir $npm_package_config_reports_dir _mocha -- -G -R $npm_package_config_reporter_test --reporter-options output= --reporter-options output=$npm_package_config_reports_dir/xunit.xml",
+    "pretest:integration": "npm -s run clean",
+    "test:integration": "npm -s run test --build-notifier:reporter_test=xunit --build-notifier:reporter_cov=cobertura --build-notifier:reports_dir=.reports",
+    "watch": "watch 'npm -s run test' lib test"
+  },
+  "dependencies": {
+    "node-notifier": "*"
+  },
+  "devDependencies": {
+    "chai": "^2.2",
+    "istanbul": "^0.3.13",
+    "jscs": "^1.12.0",
+    "jscs-jsdoc": "^0.4.5",
+    "jshint": "^2.6.3",
+    "mocha": "^2.2.1",
+    "rimraf": "^2.3.2",
+    "sinon": "^1.14",
+    "watch": "^0.16.0"
+  },
+  "engines": {
+    "node": ">= 0.10.25"
+  }
+}
