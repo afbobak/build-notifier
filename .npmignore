@@ -1,0 +1,12 @@
+*.log
+*.out
+*.pid
+*.sublime-project
+*.sublime-workspace
+*.tgz
+*.zip
+.*
+/coverage
+/Gruntfile.js
+/karma.conf.js
+/node_modules

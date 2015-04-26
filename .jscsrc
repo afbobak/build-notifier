@@ -1,0 +1,63 @@
+{
+  "disallowImplicitTypeConversion": ["numeric", "boolean", "binary", "string"],
+  "disallowKeywordsOnNewLine": ["else"],
+  "disallowPaddingNewlinesInBlocks": true,
+  "disallowSpaceAfterPrefixUnaryOperators": true,
+  "disallowSpaceBeforePostfixUnaryOperators": true,
+  "disallowSpacesInsideParentheses": true,
+  "disallowSpacesInCallExpression": true,
+  "disallowTrailingComma": true,
+  "disallowTrailingWhitespace": true,
+  "disallowYodaConditions": true,
+  "maximumLineLength": {
+    "value": 80,
+    "tabSize": 2,
+    "allowComments": true,
+    "allowUrlComments": true,
+    "allowRegex": true
+  },
+  "requireAlignedObjectValues": "all",
+  "requireBlocksOnNewline": true,
+  "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "requireCapitalizedComments": { "allExcept": [ "jshint", "jslint", "var" ] },
+  "requireCapitalizedConstructors": true,
+  "requireCommaBeforeLineBreak": true,
+  "requireCurlyBraces": true,
+  "requireDollarBeforejQueryAssignment": true,
+  "requireDotNotation": true,
+  "requireLineBreakAfterVariableAssignment": true,
+  "requireLineFeedAtFileEnd": true,
+  "requirePaddingNewLinesBeforeLineComments": { "allExcept": "firstAfterCurly" },
+  "requireParenthesesAroundIIFE": true,
+  "requireSemicolons": true,
+  "requireSpaceAfterBinaryOperators": true,
+  "requireSpaceAfterKeywords": true,
+  "requireSpaceAfterLineComment": { "allExcept": [ "#", "=" ] },
+  "requireSpaceBeforeBinaryOperators": true,
+  "requireSpaceBeforeBlockStatements": true,
+  "requireSpaceBeforeKeywords": [
+    "else",
+    "while",
+    "catch"
+  ],
+  "requireSpaceBeforeObjectValues": true,
+  "requireSpaceBetweenArguments": true,
+  "requireSpacesInsideObjectBrackets": "all",
+  "requireSpaceBetweenArguments": true,
+  "requireSpacesInConditionalExpression": true,
+  "requireSpacesInForStatement": true,
+  "requireSpacesInFunctionDeclaration": { "beforeOpeningCurlyBrace": true },
+  "requireSpacesInAnonymousFunctionExpression": { "beforeOpeningRoundBrace": true, "beforeOpeningCurlyBrace": true },
+  "safeContextKeyword": "self",
+  "validateIndentation": 2,
+  "validateLineBreaks": "LF",
+  "validateQuoteMarks": "'",
+  "plugins": [
+    "jscs-jsdoc"
+  ],
+  "jsDoc": {
+    "checkAnnotations": "jsdoc3",
+    "checkTypes": "strictNativeCase",
+    "enforceExistence": "exceptExports"
+  }
+}
