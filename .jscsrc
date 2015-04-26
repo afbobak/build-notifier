@@ -1,7 +1,7 @@
 {
   "disallowImplicitTypeConversion": ["numeric", "boolean", "binary", "string"],
   "disallowKeywordsOnNewLine": ["else"],
-  "disallowOperatorBeforeLineBreak": true,
+  "disallowOperatorBeforeLineBreak": ["=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=", "&=", "|=", "^=", "+", "-", "*", "/", "%", "<<", ">>", ">>>", "&", "|", "^", "&&", "||", "===", "==", ">=", "<=", "<", ">", "!=", "!=="],
   "disallowPaddingNewlinesInBlocks": true,
   "disallowSpaceAfterPrefixUnaryOperators": true,
   "disallowSpaceBeforePostfixUnaryOperators": true,
@@ -13,7 +13,7 @@
   "maximumLineLength": {
     "value": 80,
     "tabSize": 2,
-    "allowComments": false,
+    "allowComments": true,
     "allowUrlComments": true,
     "allowRegex": true
   },
@@ -28,7 +28,6 @@
   "requireDotNotation": true,
   "requireLineBreakAfterVariableAssignment": true,
   "requireLineFeedAtFileEnd": true,
-  "requirePaddingNewlinesBeforeKeywords": true,
   "requirePaddingNewLinesBeforeLineComments": { "allExcept": "firstAfterCurly" },
   "requireParenthesesAroundIIFE": true,
   "requireSemicolons": true,

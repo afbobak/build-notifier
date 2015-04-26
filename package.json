@@ -5,7 +5,7 @@
   "bin": {
     "nopar": "bin/build-notifier"
   },
-  "main": "lib/index.js",
+  "main": "lib/notify.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:afbobak/build-notifier.git"
@@ -26,13 +26,14 @@
   "scripts": {
     "clean": "rimraf .reports reports *.tgz *.deb *.log",
     "prejscs": "npm -s run clean",
-    "jscs": "jscs lib/**.js test/**.js | tee jscs.log && (notify -t 'JSCS' -m \"`tail jscs.log`\" && rm jscs.log)",
+    "jscs": "jscs lib/**.js test/**.js | tee .log && notify -t 'JSCS' -m \"`tail -n 1 .log`\" | exit ${PIPESTATUS[0]}",
     "prehint": "npm -s run jscs",
-    "hint": "jshint lib/**.js test/**.js | tee jshint.log && (notify -t 'JSHint' -m \"`tail jshint.log`\" && rm jshint.log)",
+    "hint": "jshint lib/**.js test/**.js | tee .log && notify -t 'JSHint' -m \"`tail -n 1 .log`\" | exit ${PIPESTATUS[0]}",
     "pretest": "npm -s run hint",
-    "test": "istanbul cover --report $npm_package_config_reporter_cov --dir $npm_package_config_reports_dir _mocha -- -G -R $npm_package_config_reporter_test --reporter-options output= --reporter-options output=$npm_package_config_reports_dir/xunit.xml",
+    "test": "mocha -G -R $npm_package_config_reporter_test --reporter-options output= --reporter-options output=$npm_package_config_reports_dir/xunit.xml",
+    "test:coverage": "istanbul cover --report $npm_package_config_reporter_cov --dir $npm_package_config_reports_dir _mocha -- -G -R $npm_package_config_reporter_test --reporter-options output= --reporter-options output=$npm_package_config_reports_dir/xunit.xml",
     "pretest:integration": "npm -s run clean",
-    "test:integration": "npm -s run test --build-notifier:reporter_test=xunit --build-notifier:reporter_cov=cobertura --build-notifier:reports_dir=.reports",
+    "test:integration": "npm -s run test:coverage --build-notifier:reporter_test=xunit --build-notifier:reporter_cov=cobertura --build-notifier:reports_dir=.reports",
     "watch": "watch 'npm -s run test' lib test"
   },
   "dependencies": {
@@ -40,11 +41,13 @@
   },
   "devDependencies": {
     "chai": "^2.2",
+    "commander": "^2.8.1",
     "istanbul": "^0.3.13",
     "jscs": "^1.12.0",
     "jscs-jsdoc": "^0.4.5",
     "jshint": "^2.6.3",
     "mocha": "^2.2.1",
+    "mock-stdin": "^0.3.0",
     "rimraf": "^2.3.2",
     "sinon": "^1.14",
     "watch": "^0.16.0"
