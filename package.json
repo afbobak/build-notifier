@@ -1,9 +1,9 @@
 {
   "name": "build-notifier",
   "description": "Notifications for your different build steps",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "bin": {
-    "nopar": "bin/build-notifier"
+    "notify": "bin/build-notifier"
   },
   "main": "lib/notify.js",
   "repository": {
