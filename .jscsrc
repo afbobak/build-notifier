@@ -1,7 +1,6 @@
 {
   "disallowImplicitTypeConversion": ["numeric", "boolean", "binary", "string"],
   "disallowKeywordsOnNewLine": ["else"],
-  "disallowOperatorBeforeLineBreak": ["=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=", "&=", "|=", "^=", "+", "-", "*", "/", "%", "<<", ">>", ">>>", "&", "|", "^", "&&", "||", "===", "==", ">=", "<=", "<", ">", "!=", "!=="],
   "disallowPaddingNewlinesInBlocks": true,
   "disallowSpaceAfterPrefixUnaryOperators": true,
   "disallowSpaceBeforePostfixUnaryOperators": true,
