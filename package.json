@@ -37,20 +37,20 @@
     "watch": "watch 'npm -s run test' lib test"
   },
   "dependencies": {
-    "commander": "^2.8.1",
-    "node-notifier": "*"
+    "commander": "^2.9.0",
+    "node-notifier": "^4.6.1"
   },
   "devDependencies": {
-    "chai": "^2.2",
-    "istanbul": "^0.3.13",
-    "jscs": "^1.12.0",
-    "jscs-jsdoc": "^0.4.5",
-    "jshint": "^2.6.3",
-    "mocha": "^2.2.1",
-    "mock-stdin": "^0.3.0",
-    "rimraf": "^2.3.2",
-    "sinon": "^1.14",
-    "watch": "^0.16.0"
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "jscs": "^3.0.7",
+    "jscs-jsdoc": "^2.0.0",
+    "jshint": "^2.9.3",
+    "mocha": "^3.1.0",
+    "mock-stdin": "^0.3.1",
+    "rimraf": "^2.5.4",
+    "sinon": "^1.17.6",
+    "watch": "^0.19.2"
   },
   "engines": {
     "node": ">= 0.10.25"
