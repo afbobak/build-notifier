@@ -137,4 +137,34 @@ describe('notify-notifications', function () {
     sinon.assert.calledOnce(process.exit);
     sinon.assert.calledWith(process.exit, 2);
   });
+
+  it('notifies eslint error as Failed', function () {
+    notify.notify({ title : 'Test', output : stdout });
+    stdin.send('✖ 1 problem (1 error, 0 warnings)\n', 'utf8');
+    stdin.send(null);
+
+    sinon.assert.calledOnce(notifier.notify);
+    sinon.assert.calledWith(notifier.notify, {
+      icon    : iconError,
+      message : '✖ 1 problem (1 error, 0 warnings)',
+      title   : 'Test Failed'
+    });
+    sinon.assert.calledOnce(process.exit);
+    sinon.assert.calledWith(process.exit, 2);
+  });
+
+  it('notifies wdio error as Failed', function () {
+    notify.notify({ title : 'Test', output : stdout });
+    stdin.send('[firefox #0a] 1 failing\n', 'utf8');
+    stdin.send(null);
+
+    sinon.assert.calledOnce(notifier.notify);
+    sinon.assert.calledWith(notifier.notify, {
+      icon    : iconError,
+      message : '[firefox #0a] 1 failing',
+      title   : 'Test Failed'
+    });
+    sinon.assert.calledOnce(process.exit);
+    sinon.assert.calledWith(process.exit, 2);
+  });
 });
