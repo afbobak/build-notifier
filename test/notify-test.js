@@ -155,7 +155,7 @@ describe('notify-notifications', function () {
 
   it('notifies wdio error as Failed', function () {
     notify.notify({ title : 'Test', output : stdout });
-    stdin.send('[firefox #0a] 1 failing\n', 'utf8');
+    stdin.send('[firefox #0a] 1 failing\n[firefox #0a]\n', 'utf8');
     stdin.send(null);
 
     sinon.assert.calledOnce(notifier.notify);
