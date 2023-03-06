@@ -1,7 +1,7 @@
 {
   "name": "build-notifier",
   "description": "Notifications for your different build steps",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "bin": {
     "notify": "bin/build-notifier"
   },
@@ -25,32 +25,22 @@
   },
   "scripts": {
     "clean": "rimraf .reports reports *.tgz *.deb *.log",
-    "prejscs": "npm -s run clean",
-    "jscs": "jscs lib/**.js test/**.js | tee .log && notify -t 'JSCS' -m \"`tail -n 1 .log`\" | exit ${PIPESTATUS[0]}",
-    "prehint": "npm -s run jscs",
-    "hint": "jshint lib/**.js test/**.js | tee .log && notify -t 'JSHint' -m \"`tail -n 1 .log`\" | exit ${PIPESTATUS[0]}",
-    "pretest": "npm -s run hint",
     "test": "mocha -G -R $npm_package_config_reporter_test --reporter-options output= --reporter-options output=$npm_package_config_reports_dir/xunit.xml",
     "test:coverage": "istanbul cover --report $npm_package_config_reporter_cov --dir $npm_package_config_reports_dir _mocha -- -G -R $npm_package_config_reporter_test --reporter-options output= --reporter-options output=$npm_package_config_reports_dir/xunit.xml",
     "pretest:integration": "npm -s run clean",
-    "test:integration": "npm -s run test:coverage --build-notifier:reporter_test=xunit --build-notifier:reporter_cov=cobertura --build-notifier:reports_dir=.reports",
-    "watch": "watch 'npm -s run test' lib test"
+    "test:integration": "npm -s run test:coverage --build-notifier:reporter_test=xunit --build-notifier:reporter_cov=cobertura --build-notifier:reports_dir=.reports"
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "node-notifier": "^4.6.1"
+    "node-notifier": "^10.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "istanbul": "^0.4.5",
-    "jscs": "^3.0.7",
-    "jscs-jsdoc": "^2.0.0",
-    "jshint": "^2.9.4",
-    "mocha": "^3.1.2",
+    "mocha": "^10.2.0",
     "mock-stdin": "^0.3.1",
-    "rimraf": "^2.5.4",
-    "sinon": "^1.17.6",
-    "watch": "^1.0.1"
+    "rimraf": "^3.0.2",
+    "sinon": "^15.0.1"
   },
   "engines": {
     "node": ">= 0.10.25"
