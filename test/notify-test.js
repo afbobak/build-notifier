@@ -16,14 +16,8 @@ var iconOk = path.join(__dirname, '..', 'images', 'ok.png');
 var iconError = path.join(__dirname, '..', 'images', 'error.png');
 
 describe('notify-cli', function () {
-  var sandbox;
-
-  beforeEach(function () {
-    sandbox = sinon.sandbox.create();
-  });
-
   afterEach(function () {
-    sandbox.restore();
+    sinon.restore();
   });
 
   it('is a function', function () {
@@ -32,14 +26,8 @@ describe('notify-cli', function () {
 });
 
 describe('notify-init', function () {
-  var sandbox;
-
-  beforeEach(function () {
-    sandbox = sinon.sandbox.create();
-  });
-
   afterEach(function () {
-    sandbox.restore();
+    sinon.restore();
   });
 
   it('is a function', function () {
@@ -47,8 +35,8 @@ describe('notify-init', function () {
   });
 
   it('uses readline from stdin to stdout', function () {
-    var rl = { on : sandbox.stub() };
-    sandbox.stub(readline, 'createInterface').returns(rl);
+    var rl = { on : sinon.stub() };
+    sinon.stub(readline, 'createInterface').returns(rl);
 
     notify.notify();
 
@@ -64,18 +52,16 @@ describe('notify-init', function () {
 });
 
 describe('notify-notifications', function () {
-  var sandbox, stdin, stdout = fs.createWriteStream('/dev/null');
+  var stdin, stdout = fs.createWriteStream('/dev/null');
 
   beforeEach(function () {
-    sandbox = sinon.sandbox.create();
-    sandbox.stub(notifier, 'notify');
-    sandbox.stub(process, 'exit');
+    sinon.stub(notify._INTERNAL, 'notify');
+    sinon.stub(process, 'exit');
     stdin = mockStdin.stdin();
   });
 
   afterEach(function () {
-    stdin.restore();
-    sandbox.restore();
+    sinon.restore();
   });
 
   it('notifies as Passed', function () {
@@ -83,8 +69,8 @@ describe('notify-notifications', function () {
     stdin.send('everything is ok\n', 'utf8');
     stdin.send(null);
 
-    sinon.assert.calledOnce(notifier.notify);
-    sinon.assert.calledWith(notifier.notify, {
+    sinon.assert.calledOnce(notify._INTERNAL.notify);
+    sinon.assert.calledWith(notify._INTERNAL.notify, {
       icon    : iconOk,
       message : 'everything is ok',
       title   : 'Test Passed'
@@ -98,8 +84,8 @@ describe('notify-notifications', function () {
     stdin.send('3 code style errors found.\n', 'utf8');
     stdin.send(null);
 
-    sinon.assert.calledOnce(notifier.notify);
-    sinon.assert.calledWith(notifier.notify, {
+    sinon.assert.calledOnce(notify._INTERNAL.notify);
+    sinon.assert.calledWith(notify._INTERNAL.notify, {
       icon    : iconError,
       message : '3 code style errors found.',
       title   : 'Test Failed'
@@ -113,8 +99,8 @@ describe('notify-notifications', function () {
     stdin.send('1 error.\n', 'utf8');
     stdin.send(null);
 
-    sinon.assert.calledOnce(notifier.notify);
-    sinon.assert.calledWith(notifier.notify, {
+    sinon.assert.calledOnce(notify._INTERNAL.notify);
+    sinon.assert.calledWith(notify._INTERNAL.notify, {
       icon    : iconError,
       message : '1 error.',
       title   : 'Test Failed'
@@ -128,8 +114,8 @@ describe('notify-notifications', function () {
     stdin.send('2 errors.\n', 'utf8');
     stdin.send(null);
 
-    sinon.assert.calledOnce(notifier.notify);
-    sinon.assert.calledWith(notifier.notify, {
+    sinon.assert.calledOnce(notify._INTERNAL.notify);
+    sinon.assert.calledWith(notify._INTERNAL.notify, {
       icon    : iconError,
       message : '2 errors.',
       title   : 'Test Failed'
@@ -143,8 +129,8 @@ describe('notify-notifications', function () {
     stdin.send('✖ 1 problem (1 error, 0 warnings)\n', 'utf8');
     stdin.send(null);
 
-    sinon.assert.calledOnce(notifier.notify);
-    sinon.assert.calledWith(notifier.notify, {
+    sinon.assert.calledOnce(notify._INTERNAL.notify);
+    sinon.assert.calledWith(notify._INTERNAL.notify, {
       icon    : iconError,
       message : '✖ 1 problem (1 error, 0 warnings)',
       title   : 'Test Failed'
@@ -158,8 +144,8 @@ describe('notify-notifications', function () {
     stdin.send('[firefox #0a] 1 failing\n[firefox #0a]\n', 'utf8');
     stdin.send(null);
 
-    sinon.assert.calledOnce(notifier.notify);
-    sinon.assert.calledWith(notifier.notify, {
+    sinon.assert.calledOnce(notify._INTERNAL.notify);
+    sinon.assert.calledWith(notify._INTERNAL.notify, {
       icon    : iconError,
       message : '[firefox #0a] 1 failing',
       title   : 'Test Failed'
